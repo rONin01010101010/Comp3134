@@ -1,0 +1,54 @@
+1) What is the definition of server port?
+Answer: A server port is a numerical identifier (0-65535) used by the Transport Layer to identify specific applications or services running on a server, allowing multiple services to run simultaneously on the same IP address.
+
+2) What is server port range?
+Answer: 0-1023 (Well-Known Ports / System Ports)
+Complete port ranges:
+
+0-1023: Well-Known/System Ports (requires root/admin privileges)
+1024-49151: Registered Ports (assigned by IANA for specific services)
+49152-65535: Dynamic/Private/Ephemeral Ports (temporary client ports)
+
+3) How many bits does the number above represent?
+Answer: 16 bits
+Calculation:
+
+Port range: 0-65535
+Total possible values: 65,536 (including 0)
+2^16 = 65,536
+Therefore: 16 bits
+
+4) State 10 common server ports:
+20 FTPFile Transfer Protocol (Data),
+21 FTPFile Transfer Protocol (Control),
+22 SSHSecure Shell,
+23 TelnetTelnet (insecure remote login),
+25 SMTPSimple Mail Transfer Protocol,
+53 DNSDomain Name System,
+80 HTTPHypertext Transfer Protocol,
+110 POP3Post Office Protocol v3,
+143 IMAPInternet Message Access Protocol,
+443 HTTPSHTTP Secure (SSL/TLS)
+Bonus common ports:
+
+3306 - MySQL Database
+5432 - PostgreSQL Database
+27017 - MongoDB Database
+3389 - RDP (Remote Desktop Protocol)
+8080 - HTTP Alternate/Proxy
+
+
+Explanation:
+Bits Calculation:
+bits        5       4       3       2       1
+max vals   32      16       8       4       2
+           2^5     2^4     2^3     2^2     2^1 
+
+Port numbers are stored in the Transport Layer header (TCP/UDP)
+Both TCP and UDP headers allocate 16 bits for:
+
+Source Port (16 bits)
+Destination Port (16 bits)
+
+
+This gives us 2^16 = 65,536 possible port numbers (0-65535)
