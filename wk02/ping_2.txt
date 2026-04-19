@@ -1,0 +1,7 @@
+ ping 146.190.247.45 -w 2s
+ping: invalid argument: '2s'
+root@ubuntu-s-1vcpu-1gb-tor1-01:~# ping 146.190.247.45 -w 2
+PING 146.190.247.45 (146.190.247.45) 56(84) bytes of data.
+64 bytes from 146.190.247.45: icmp_seq=1 ttl=64 time=0.021 ms
+64 bytes from 146.190.247.45: icmp_seq=2 ttl=64 time=0.043 ms
+

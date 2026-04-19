@@ -1,0 +1,5 @@
+traceroute 146.190.247.45
+traceroute to 146.190.247.45 (146.190.247.45), 30 hops max, 60 byte packets
+ 1  ubuntu-s-1vcpu-1gb-tor1-01 (146.190.247.45)  0.033 ms  0.006 ms  0.004 ms
+root@ubuntu-s-1vcpu-1gb-tor1-01:~# exit
+
