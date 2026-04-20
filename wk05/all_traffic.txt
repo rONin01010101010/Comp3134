@@ -1,0 +1,6 @@
+root@ubuntu-s-1vcpu-1gb-tor1-01:~# tcpdump -i any -w all_traffic_$(date +%Y%m%d_%H%M).pcap
+tcpdump: data link type LINUX_SLL2
+tcpdump: listening on any, link-type LINUX_SLL2 (Linux cooked v2), snapshot length 262144 bytes
+^C400 packets captured
+402 packets received by filter
+0 packets dropped by kernel

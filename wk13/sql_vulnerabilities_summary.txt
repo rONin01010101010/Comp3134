@@ -1,0 +1,72 @@
+SQL Vulnerabilities Summary — getusers_1.php
+=============================================
+
+Test 1: Input "Ben"
+--------------------
+Query executed:
+    SELECT id, username, email, firstname, lastname, active
+    FROM users
+    WHERE firstname = 'Ben' AND active = 1
+
+Observation:
+The search behaved as expected. Only the row where firstname = 'Ben' AND active = 1 was returned.
+Ben's row had active = 0, so no results were returned — which is the intended behaviour.
+The query worked correctly and as designed.
+
+Conclusion: Normal input produces normal output. No vulnerability triggered.
+
+
+Test 2: Input "Ben'-- " (Ben, single quote, two dashes, space — 7 characters)
+------------------------------------------------------------------------------
+Query executed:
+    SELECT id, username, email, firstname, lastname, active
+    FROM users
+    WHERE firstname = 'Ben'-- ' AND active = 1
+
+Observation:
+The single quote closes the firstname string value prematurely. The two dashes (--) are the
+MySQL single-line comment syntax, which causes everything after them to be ignored.
+This means the "AND active = 1" condition is completely stripped from the query.
+
+The effective query becomes:
+    SELECT ... FROM users WHERE firstname = 'Ben'
+
+As a result, Ben's row IS returned even though his active column equals 0 — something that
+should never happen under normal conditions. The attacker bypassed the active = 1 filter.
+
+Conclusion: SQL injection confirmed. The comment-injection technique removed a security
+condition from the query, returning data that should have been excluded.
+
+
+Test 3: Input "Ben' or 1=1 "
+------------------------------
+Query executed:
+    SELECT id, username, email, firstname, lastname, active
+    FROM users
+    WHERE firstname = 'Ben' or 1=1  AND active = 1
+
+Note: Due to SQL operator precedence, AND is evaluated before OR, so the effective logic is:
+    WHERE firstname = 'Ben' OR (1=1 AND active = 1)
+    → Returns Ben (regardless of active) + ALL rows where active = 1
+
+In many MySQL configurations without parentheses this returns ALL rows in the table,
+because 1=1 is always true and overrides the WHERE filter entirely.
+
+Observation:
+All rows in the users table were returned, including users with active = 0.
+The attacker gained access to the entire user dataset with a single injected string.
+This is a classic "always true" SQL injection payload.
+
+Conclusion: Critical SQL injection confirmed. The entire users table was dumped.
+An attacker could use this to enumerate all accounts, harvest emails, usernames,
+and potentially chain this with further attacks (e.g. UNION-based data extraction).
+
+
+Overall Summary:
+----------------
+The page getusers_1.php is critically vulnerable to SQL injection because user input is
+interpolated directly into a raw SQL string with no sanitization or parameterization.
+All three scenarios demonstrate progressively more damaging injection techniques:
+- Test 1: Normal input (no attack)
+- Test 2: Comment injection to bypass a filter condition
+- Test 3: Boolean injection to dump the entire table

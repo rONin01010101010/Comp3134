@@ -1,0 +1,10 @@
+root@comp3134-winter2026:~# tcpdump -i eth0 port 80
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+08:56:01.636526 IP 189.58.6.34.bc.googleusercontent.com.49495 > comp3134-winter2026.http: Flags [SEW], seq 1245765911, win 65535, options [mss 1420,nop,wscale 8,nop,nop,sackOK], length 0
+08:56:02.633714 IP 189.58.6.34.bc.googleusercontent.com.49495 > comp3134-winter2026.http: Flags [SEW], seq 1245765911, win 65535, options [mss 1420,nop,wscale 8,nop,nop,sackOK], length 0
+08:56:04.634134 IP 189.58.6.34.bc.googleusercontent.com.49495 > comp3134-winter2026.http: Flags [S], seq 1245765911, win 65535, options [mss 1420,nop,wscale 8,nop,nop,sackOK], length 0
+^C
+3 packets captured
+3 packets received by filter
+0 packets dropped by kernel

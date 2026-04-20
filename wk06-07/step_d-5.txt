@@ -1,0 +1,2 @@
+%2e%2e%2f is the URL-encoded version of ../../ and has the same effect.
+The server decodes it and traverses up directories, bypassing basic input checks.

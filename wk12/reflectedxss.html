@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reflected XSS Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 60px auto; padding: 20px; }
+        input[type="text"] { width: 70%; padding: 8px; }
+        button { padding: 8px 16px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        #output { margin-top: 20px; padding: 14px; border: 1px solid #ccc; border-radius: 4px;
+                  min-height: 40px; background: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <h1>Reflected XSS Demo</h1>
+
+    <form id="xssForm">
+        <input type="text" id="userInput" placeholder="Type something..." />
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        const form = document.getElementById("xssForm");
+        const output = document.getElementById("output");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Disable default form behavior
+
+            const value = document.getElementById("userInput").value;
+
+            // Directly inject input as innerHTML — intentionally vulnerable for demo
+            output.innerHTML = value;
+        });
+    </script>
+</body>
+</html>

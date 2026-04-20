@@ -1,0 +1,16 @@
+root@comp3134-winter2026:~# tcpdump -i eth0 -c 10
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+08:54:29.918856 IP comp3134-winter2026.ssh > 198.211.111.194.46552: Flags [P.], seq 4096962227:4096962355, ack 661301192, win 502, options [nop,nop,TS val 300194890 ecr 65201410], length 128
+08:54:29.918935 IP comp3134-winter2026.ssh > 198.211.111.194.46552: Flags [P.], seq 128:192, ack 1, win 502, options [nop,nop,TS val 300194891 ecr 65201410], length 64
+08:54:29.918976 IP comp3134-winter2026.ssh > 198.211.111.194.46552: Flags [P.], seq 192:272, ack 1, win 502, options [nop,nop,TS val 300194891 ecr 65201410], length 80
+08:54:29.919027 IP comp3134-winter2026.ssh > 198.211.111.194.46552: Flags [P.], seq 272:352, ack 1, win 502, options [nop,nop,TS val 300194891 ecr 65201410], length 80
+08:54:29.919070 IP comp3134-winter2026.ssh > 198.211.111.194.46552: Flags [P.], seq 352:432, ack 1, win 502, options [nop,nop,TS val 300194891 ecr 65201410], length 80
+08:54:29.919114 IP comp3134-winter2026.ssh > 198.211.111.194.46552: Flags [P.], seq 432:496, ack 1, win 502, options [nop,nop,TS val 300194891 ecr 65201410], length 64
+08:54:29.923366 IP 198.211.111.194.46552 > comp3134-winter2026.ssh: Flags [.], ack 0, win 501, options [nop,nop,TS val 65201427 ecr 300194880], length 0
+08:54:29.934269 IP 198.211.111.194.46552 > comp3134-winter2026.ssh: Flags [.], ack 128, win 501, options [nop,nop,TS val 65201438 ecr 300194890], length 0
+08:54:29.934343 IP 198.211.111.194.46552 > comp3134-winter2026.ssh: Flags [.], ack 192, win 501, options [nop,nop,TS val 65201438 ecr 300194891], length 0
+08:54:29.934343 IP 198.211.111.194.46552 > comp3134-winter2026.ssh: Flags [.], ack 272, win 501, options [nop,nop,TS val 65201438 ecr 300194891], length 0
+10 packets captured
+38 packets received by filter
+0 packets dropped by kernel

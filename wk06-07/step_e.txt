@@ -1,0 +1,4 @@
+Mitigation 1: Used basename() to strip any directory traversal attempts, 
+limiting access to the html directory only.
+Mitigation 2: Used file_exists() to check the path exists before scanning it.
+Bonus: Used strpos() to block any input containing a dot, preventing filenames from being passed.

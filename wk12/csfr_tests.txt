@@ -1,0 +1,44 @@
+CSRF Mitigation Test Observations
+===================================
+
+Test 1: Submitting via csfr_form.php (the legitimate PHP form)
+---------------------------------------------------------------
+Steps: Opened csfr_form.php, entered username "host" and password "pass", submitted.
+
+Observation:
+The form submitted successfully to csfr_action.php. The session confirmation token generated
+by csfr_form.php was sent as a hidden field. On the action page, the session variable matched
+the POST confirmation value, so the request was treated as legitimate and the login succeeded.
+
+Result: ✅ Success — "Login successful! CSRF token validated."
+
+
+Test 2: Submitting via csfr.html (the forged/attacker page)
+------------------------------------------------------------
+Steps: Opened csfr.html (the original attack page from Part C), which auto-submits a hidden
+form with hardcoded username/password directly to csfr_action.php.
+
+Observation:
+The forged form does NOT include a confirmation token, so $_POST["confirmation"] is null.
+The session variable $_SESSION["confirmation"] was never set by this page either (it was
+set by csfr_form.php in a legitimate session), so both values are null or mismatched.
+csfr_action.php rejected the request immediately.
+
+Result: 🚫 Blocked — "CSRF token mismatch! Request rejected."
+
+
+Key Takeaways:
+--------------
+1. Without the token: The forged page (csfr.html) cannot replicate the session-bound
+   confirmation token because it has no access to the server-side session — only the
+   legitimate origin page (csfr_form.php) can generate and embed it.
+
+2. With the token: Legitimate submissions from csfr_form.php carry the exact token value
+   stored in the session, so they pass validation cleanly.
+
+3. This technique is known as the "Synchronizer Token Pattern" — one of the most reliable
+   defenses against CSRF attacks. The attacker can forge the form fields, but cannot forge
+   the session-bound token.
+
+4. Even if an attacker somehow guesses the form field values (username/password), they
+   still can't reproduce the randomly generated token without access to the victim's session.

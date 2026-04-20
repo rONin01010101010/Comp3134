@@ -1,0 +1,4 @@
+The issue is that HTML comments are visible in the browser's page source,
+exposing sensitive information like employee IDs to anyone who views the source.
+The fix is to convert HTML comments to PHP comments, which are processed 
+server-side and never sent to the browser.
